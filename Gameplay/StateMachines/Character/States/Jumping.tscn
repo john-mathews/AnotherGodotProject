@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1157e11bj450"]
+
+[ext_resource type="Script" uid="uid://b1sq7epy8oqpa" path="res://Gameplay/StateMachines/Character/States/jumping.gd" id="1_uq36o"]
+
+[node name="Jumping" type="Node"]
+script = ExtResource("1_uq36o")

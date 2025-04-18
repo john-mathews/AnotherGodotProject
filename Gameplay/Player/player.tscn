@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdt0erjwwecan"]
+
+[ext_resource type="Script" uid="uid://k03im10mpx08" path="res://Gameplay/Player/player.gd" id="1_t4lfm"]
+[ext_resource type="PackedScene" uid="uid://drgqqn556yegx" path="res://Gameplay/StateMachines/Character/CharacterStateMachine.tscn" id="1_xoh2h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t4lfm"]
+radius = 16.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_t4lfm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_t4lfm")
+
+[node name="CharacterStateMachine" parent="." instance=ExtResource("1_xoh2h")]
