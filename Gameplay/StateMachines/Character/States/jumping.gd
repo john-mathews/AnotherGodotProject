@@ -12,6 +12,5 @@ func run(fighter: Fighter) -> void:
 		
 
 func end(fighter: Fighter) -> void:
-	if fighter.velocity.y < 0:
-		fighter.velocity.y /= 3
+	pass
 	

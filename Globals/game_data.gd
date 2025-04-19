@@ -13,5 +13,4 @@ func build_node_map() -> void:
 		if ResourceLoader.exists(state_node_path, "PackedScene"):
 			var state_node = load(state_node_path).instantiate() as StateAction
 			character_state_node_map[CharacterStateMachine.CharacterStates[state_name]] = state_node
-			add_child(state_node)
 		

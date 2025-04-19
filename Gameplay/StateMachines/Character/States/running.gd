@@ -1,5 +1,8 @@
 extends StateAction
 
+func start(fighter: Fighter) -> void:
+	fighter.doing_action = false
+
 func run(fighter: Fighter) -> void:
 	var max_speed: float
 	var acceleration: float

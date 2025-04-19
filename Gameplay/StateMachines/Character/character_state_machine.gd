@@ -21,7 +21,7 @@ var previous_state:= CharacterStates.IDLE
 var previous_state_node: StateAction
 	
 func change_state(new_state: CharacterStates, character: Fighter) -> void:
-	if current_state != new_state:
+	if current_state != new_state || current_state_node != SharedData.character_state_node_map[current_state]:
 		if current_state && current_state_node:
 			previous_state = current_state
 			previous_state_node = current_state_node
@@ -29,7 +29,6 @@ func change_state(new_state: CharacterStates, character: Fighter) -> void:
 		
 		current_state = new_state
 		current_state_node = SharedData.character_state_node_map[current_state]
-		print(current_state_node)
 		if current_state_node:
 			current_state_node.start(character)
 		#get state node, call init()

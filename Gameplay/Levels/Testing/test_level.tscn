@@ -1,11 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddofhuqt8mw1i"]
+[gd_scene load_steps=5 format=3 uid="uid://ddofhuqt8mw1i"]
 
-[ext_resource type="PackedScene" uid="uid://bdt0erjwwecan" path="res://Gameplay/Player/player.tscn" id="1_njyss"]
+[ext_resource type="PackedScene" uid="uid://bdt0erjwwecan" path="res://Gameplay/Fighter/Player/player.tscn" id="1_njyss"]
+[ext_resource type="PackedScene" uid="uid://bk8b8bxsmdcw4" path="res://Gameplay/Levels/base_level.tscn" id="2_1hw1c"]
+[ext_resource type="PackedScene" uid="uid://dl8gdb5ermign" path="res://Gameplay/Fighter/TrainingDummy/dummy.tscn" id="3_rn2m7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mk3g"]
 size = Vector2(800, 200)
 
 [node name="TestLevel" type="Node2D"]
+
+[node name="BaseLevel" parent="." instance=ExtResource("2_1hw1c")]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -18,4 +22,7 @@ position = Vector2(-200, -238)
 polygon = PackedVector2Array(400, 900, 1200, 900, 1200, 1100, 400, 1100)
 
 [node name="Player" parent="." instance=ExtResource("1_njyss")]
-position = Vector2(598, 497)
+position = Vector2(427, 476)
+
+[node name="Dummy" parent="." instance=ExtResource("3_rn2m7")]
+position = Vector2(827, 495)

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dl8gdb5ermign"]
+
+[ext_resource type="PackedScene" uid="uid://drgqqn556yegx" path="res://Gameplay/StateMachines/Character/CharacterStateMachine.tscn" id="1_3shqw"]
+[ext_resource type="Script" uid="uid://drq4e6f3e0ggk" path="res://Gameplay/Fighter/TrainingDummy/dummy.gd" id="1_8kwha"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e80ds"]
+radius = 16.0
+
+[node name="Dummy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_8kwha")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_e80ds")
+
+[node name="CharacterStateMachine" parent="." instance=ExtResource("1_3shqw")]
