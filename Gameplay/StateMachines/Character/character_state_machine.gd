@@ -31,12 +31,8 @@ func change_state(new_state: CharacterStates, character: Fighter) -> void:
 		current_state_node = SharedData.character_state_node_map[current_state]
 		if current_state_node:
 			current_state_node.start(character)
-		#get state node, call init()
-		#init could set player values, like is_attacking or is_guarding or pass
+
 		
 func run_state(character: Fighter) -> void:
-	#Make state node map
-	#Make nodes for each state with actions
-	#actions set animations, adjust velocity, do combat, etc.
-	current_state_node.run(character)
-	pass
+	if current_state_node:
+		current_state_node.run(character)
