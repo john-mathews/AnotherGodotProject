@@ -1,0 +1,48 @@
+class_name FighterWithBehaviors extends Fighter
+
+var up_attack: Attack
+var neutral_attack: Attack
+var down_attack: Attack
+
+var up_special: Attack
+var neutral_special: Attack
+var down_special: Attack
+
+var can_attack:= false
+var can_up_attack:= false
+var can_down_attack:= false
+var can_roll:= false
+var can_shield:= false
+var can_special:= false
+var can_up_special:= false
+var can_down_special:= false
+
+var can_move:= false
+var can_jump:= false
+var can_fall:= false
+var is_KOd:= false
+var is_attacking:= false
+
+func _physics_process(delta: float) -> void:
+	super(delta)
+	if is_KOd:
+		velocity = Vector2.ZERO
+	else:
+		#combat behaviors
+		if can_roll:
+			pass
+		elif can_shield:
+			pass
+		elif can_special:
+			pass
+		elif can_attack:
+			neutral_attack.animation.play("attack")
+		
+		#movement behaviors	
+		if can_fall:
+			velocity.y /= jump_release_dampening
+		elif can_jump:
+			velocity.y = jump_velocity
+			jumps_available -= 1
+		elif can_move:
+			velocity.x = move_toward(velocity.x, max_speed * direction, acceleration)

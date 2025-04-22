@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://cua27td3ut3vx"]
+
+[ext_resource type="Script" uid="uid://b3y6mttx5tw2b" path="res://Gameplay/Fighter/Attacks/basic_attack.gd" id="1_bgcv7"]
+
+[sub_resource type="Animation" id="Animation_ft80u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bgcv7"]
+resource_name = "attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-30, 0), Vector2(50, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ynjwx"]
+_data = {
+&"RESET": SubResource("Animation_ft80u"),
+&"attack": SubResource("Animation_bgcv7")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bgcv7"]
+
+[node name="BasicAttack" type="Node2D"]
+script = ExtResource("1_bgcv7")
+attack_name = "neutral_basic"
+damage = 10.0
+knockback = 10.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ynjwx")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_bgcv7")
+debug_color = Color(0.829478, 0.359879, 0.429807, 0.42)
