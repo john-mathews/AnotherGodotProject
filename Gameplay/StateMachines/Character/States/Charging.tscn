@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cn0mkg65ftw5n"]
-
-[ext_resource type="Script" uid="uid://djb7i5u10i4u7" path="res://Gameplay/StateMachines/Character/States/charging.gd" id="1_nnyce"]
-
-[node name="Charging" type="Node"]
-script = ExtResource("1_nnyce")

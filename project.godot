@@ -83,8 +83,5 @@ special={
 
 2d_physics/layer_1="Level"
 2d_physics/layer_2="Fighter"
-
-[rendering]
-
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
+2d_physics/layer_3="Attack"
+2d_physics/layer_4="Item"
