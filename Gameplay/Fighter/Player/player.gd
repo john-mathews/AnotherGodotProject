@@ -1,17 +1,16 @@
-extends FighterWithBehaviors
+class_name PlayerFighter extends FighterWithBehaviors
 
-var roll_threshold:= 0.8
-var attack_threshold:= 0.6
+const roll_threshold:= 0.8
+const v_attack_threshold:= 0.3
 
 @onready var dynamic_particles:= $DynamicParticles
-@onready var base_attack:= $BasicAttack
+@onready var base_attack:= $BaseAttack
 
 func _ready() -> void:
 	neutral_attack = base_attack
 	assign_attack_owner()
 
 func _physics_process(delta: float) -> void:
-	super(delta)
 	direction = Input.get_axis("left","right")
 	if direction < 0:
 		flip_horizontal = true
@@ -30,9 +29,30 @@ func _physics_process(delta: float) -> void:
 	can_attack = Input.is_action_just_pressed("attack")
 	can_special = Input.is_action_just_pressed("special")
 	#add check later to see if attack should be up or down based on attack threshold and v_direction
+	
+	#run behavior tree
+	super(delta)
+	
 	dynamic_particles.update_particles(delta, velocity)
+	
 
 func assign_attack_owner() -> void:
 	for child in get_children():
 		if child is Attack:
 			child.attack_owner = self
+
+func select_attack(fighter: FighterWithBehaviors) -> Attack:
+	if fighter.v_direction < -v_attack_threshold:
+		return fighter.up_attack
+	elif fighter.v_direction > v_attack_threshold:
+		return fighter.down_attack
+	else:
+		return fighter.neutral_attack
+	
+func select_special(fighter: FighterWithBehaviors) -> Attack:
+	if fighter.v_direction < -v_attack_threshold:
+		return fighter.up_special
+	elif fighter.v_direction > v_attack_threshold:
+		return fighter.down_special
+	else:
+		return fighter.neutral_special

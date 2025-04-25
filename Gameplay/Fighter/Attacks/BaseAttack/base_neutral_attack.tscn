@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cua27td3ut3vx"]
+
+[ext_resource type="Script" uid="uid://c0wx3idp8saoc" path="res://Gameplay/Fighter/Attacks/BaseAttack/base_neutral_attack.gd" id="1_lkb0f"]
+[ext_resource type="AnimationLibrary" uid="uid://bcimm45u6x63r" path="res://FX/Animations/attacks.res" id="2_00dui"]
+[ext_resource type="PackedScene" uid="uid://bvkwkh1yplrb5" path="res://Gameplay/Fighter/Attacks/attack_hit_box.tscn" id="2_103ut"]
+
+[node name="BaseNeutralAttack" type="Node2D"]
+script = ExtResource("1_lkb0f")
+attack_name = "base_neutral_attack"
+damage = 10.0
+knockback = 2.0
+attack_hit_direction = Vector2(1, -1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": ExtResource("2_00dui")
+}
+
+[node name="AttackHitBox" parent="." instance=ExtResource("2_103ut")]
+monitoring = true

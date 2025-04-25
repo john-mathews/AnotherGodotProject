@@ -14,4 +14,6 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BattleField"]
 shape = SubResource("CircleShape2D_kty2a")
 
+[node name="Spawner" type="Node2D" parent="."]
+
 [connection signal="body_exited" from="BattleField" to="." method="_on_battle_field_body_exited"]

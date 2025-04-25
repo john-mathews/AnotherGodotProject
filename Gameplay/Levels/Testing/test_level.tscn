@@ -26,3 +26,8 @@ position = Vector2(427, 476)
 
 [node name="Dummy" parent="." instance=ExtResource("3_rn2m7")]
 position = Vector2(827, 495)
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="InitialSpawner" type="Node2D" parent="SpawnPoints"]
+position = Vector2(788, 346)

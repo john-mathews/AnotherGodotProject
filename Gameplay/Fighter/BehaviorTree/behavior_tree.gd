@@ -1,12 +1,12 @@
 class_name FighterWithBehaviors extends Fighter
 
-var up_attack: Attack
-var neutral_attack: Attack
-var down_attack: Attack
+@export var up_attack: Attack
+@export var neutral_attack: Attack
+@export var down_attack: Attack
 
-var up_special: Attack
-var neutral_special: Attack
-var down_special: Attack
+@export var up_special: Attack
+@export var neutral_special: Attack
+@export var down_special: Attack
 
 var can_attack:= false
 var can_up_attack:= false
@@ -34,9 +34,11 @@ func _physics_process(delta: float) -> void:
 		elif can_shield:
 			pass
 		elif can_special:
-			pass
+			var selected_special = select_special(self)
+			selected_special.play(selected_special.attack_name)
 		elif can_attack:
-			neutral_attack.animation.play("attack")
+			var selected_attack = select_attack(self)
+			selected_attack.play(selected_attack.attack_name)
 		
 		#movement behaviors	
 		if can_fall:
@@ -46,3 +48,11 @@ func _physics_process(delta: float) -> void:
 			jumps_available -= 1
 		elif can_move:
 			velocity.x = move_toward(velocity.x, max_speed * direction, acceleration)
+
+
+func select_attack(fighter: FighterWithBehaviors) -> Attack:
+	return fighter.neutral_attack
+
+func select_special(fighter: FighterWithBehaviors) -> Attack:
+	return fighter.neutral_special
+	

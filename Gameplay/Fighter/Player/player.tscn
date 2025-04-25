@@ -1,16 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdt0erjwwecan"]
+[gd_scene load_steps=6 format=3 uid="uid://bdt0erjwwecan"]
 
 [ext_resource type="Script" uid="uid://k03im10mpx08" path="res://Gameplay/Fighter/Player/player.gd" id="1_t4lfm"]
 [ext_resource type="PackedScene" uid="uid://boak455ec0dgy" path="res://FX/Particles/dynamic_particles.tscn" id="2_c7odp"]
-[ext_resource type="PackedScene" uid="uid://cua27td3ut3vx" path="res://Gameplay/Fighter/Attacks/basic_attack.tscn" id="3_bbp8m"]
+[ext_resource type="PackedScene" uid="uid://cua27td3ut3vx" path="res://Gameplay/Fighter/Attacks/BaseAttack/base_neutral_attack.tscn" id="3_bbp8m"]
+[ext_resource type="PackedScene" uid="uid://brx4rhlrso0b" path="res://Gameplay/Fighter/Attacks/BaseSpecial/base_neutral_special.tscn" id="3_swh3h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t4lfm"]
 radius = 16.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("neutral_attack", "neutral_special")]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_t4lfm")
+neutral_attack = NodePath("BaseNeutralAttack")
+neutral_special = NodePath("BaseNeutralSpecial")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_t4lfm")
@@ -19,4 +22,6 @@ shape = SubResource("CircleShape2D_t4lfm")
 position = Vector2(0, 12)
 emitting = false
 
-[node name="BasicAttack" parent="." instance=ExtResource("3_bbp8m")]
+[node name="BaseNeutralSpecial" parent="." instance=ExtResource("3_swh3h")]
+
+[node name="BaseNeutralAttack" parent="." instance=ExtResource("3_bbp8m")]

@@ -28,6 +28,20 @@ var input_dir: Vector2
 var flip_horizontal: bool
 var jumps_available: int = 2
 
+	
+func on_spawn() -> void:
+	SharedData.add_fighter(self)
+
+	
+#fall off stage -> remove stock etc
+func on_death() -> void:
+	pass
+
+#character out of stock -> removed from game -> game over?
+func on_elimination() -> void:
+	SharedData.remove_fighter(self)
+	queue_free()
+
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
@@ -59,20 +73,3 @@ func handle_collision(other_ball: Fighter):
 	
 	velocity += impulse * collision_normal * absorption
 	other_ball.velocity -= impulse * collision_normal * other_ball.absorption
-	if last_velocity.length() <= push_force && other_ball.last_velocity.length() <= push_force:
-		var new_vel = collision_normal * push_force
-		velocity = new_vel
-		other_ball.velocity = new_vel
-
-##pool ball physics
-#func bounce_fighters(other_ball: Fighter) -> void:
-	#var collision_normal = (other_ball.position - position).normalized()
-	#var relative_velocity = last_velocity - other_ball.last_velocity
-	#var velocity_along_normal = relative_velocity.dot(collision_normal)
-#
-	## Calculate impulse for elastic collision
-	#var restitution = bounce  # 1 = Perfectly elastic
-	#var impulse = -((1 + restitution) * velocity_along_normal) / 2
-	#
-	#velocity += impulse * collision_normal * absorption
-	#other_ball.velocity -= impulse * collision_normal * other_ball.absorption

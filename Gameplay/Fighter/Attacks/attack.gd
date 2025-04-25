@@ -3,8 +3,9 @@ class_name Attack extends Node2D
 @export var attack_name: String
 @export var damage: float
 @export var knockback: float #use collision normal for direction
+@export var attack_hit_direction: Vector2
 
-@onready var hurtbox: Area2D = $Area2D
+@onready var hurtbox: Area2D = $AttackHitBox
 @onready var animation: AnimationPlayer = $AnimationPlayer
 
 var attack_owner: Fighter
@@ -16,15 +17,20 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D):
 	if  body != attack_owner && body is Fighter:
-		print(body)
 		handle_collision(body)
 		
 func handle_collision(getting_hit: Fighter):
 	var collision_normal = (getting_hit.position - attack_owner.position).normalized()
-	collision_normal.y -= 1 
-	var attack_force = collision_normal * knockback * max(getting_hit.health, 1)
-	getting_hit.health += damage
+	#collision_normal.y -= 1 #adds more vertical knockback to hit
+	var hit_direction_modifier = Vector2(-1, 1) if attack_owner.flip_horizontal else Vector2(1, 1)
+	var total_knockback = knockback * max(getting_hit.health/2, 1)
+	var total_direction = collision_normal + (attack_hit_direction * hit_direction_modifier)
+	var attack_force =  total_direction * total_knockback
 	var relative_velocity = attack_force - getting_hit.velocity
-	print(attack_force)
-	print(relative_velocity)
 	getting_hit.velocity = relative_velocity * getting_hit.absorption
+	getting_hit.health += damage
+	hurtbox.emit_particles(total_knockback)
+	
+
+func play(animation_name: String) -> void:
+	animation.play(animation_name)
