@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bpbi7pyc21oxq"]
 
-[ext_resource type="Script" uid="uid://f2v7wdxyx01n" path="res://Gameplay/Fighter/Attacks/base_attack.gd" id="1_lkb0f"]
-[ext_resource type="PackedScene" uid="uid://bvkwkh1yplrb5" path="res://Gameplay/Fighter/Attacks/attack_hit_box.tscn" id="2_mksvi"]
+[ext_resource type="Script" uid="uid://f2v7wdxyx01n" path="res://Gameplay/Fighter/Attacks/BaseAttack/base_attack.gd" id="1_lkb0f"]
+[ext_resource type="PackedScene" uid="uid://bvkwkh1yplrb5" path="res://Gameplay/Fighter/Attacks/BaseAttack/attack_hit_box.tscn" id="2_mksvi"]
 [ext_resource type="AnimationLibrary" uid="uid://bcimm45u6x63r" path="res://FX/Animations/attacks.res" id="2_u3xry"]
 
 [node name="BaseAttack" type="Node2D"]
@@ -13,4 +13,6 @@ libraries = {
 }
 
 [node name="AttackHitBox" parent="." instance=ExtResource("2_mksvi")]
-monitoring = true
+physics_interpolation_mode = 1
+auto_translate_mode = 1
+priority = 5

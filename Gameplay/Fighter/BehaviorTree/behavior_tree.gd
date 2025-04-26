@@ -1,9 +1,9 @@
 class_name FighterWithBehaviors extends Fighter
 
+@export_group("attacks")
 @export var up_attack: Attack
 @export var neutral_attack: Attack
 @export var down_attack: Attack
-
 @export var up_special: Attack
 @export var neutral_special: Attack
 @export var down_special: Attack

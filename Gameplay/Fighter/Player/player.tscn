@@ -1,19 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdt0erjwwecan"]
+[gd_scene load_steps=10 format=3 uid="uid://bdt0erjwwecan"]
 
 [ext_resource type="Script" uid="uid://k03im10mpx08" path="res://Gameplay/Fighter/Player/player.gd" id="1_t4lfm"]
 [ext_resource type="PackedScene" uid="uid://boak455ec0dgy" path="res://FX/Particles/dynamic_particles.tscn" id="2_c7odp"]
-[ext_resource type="PackedScene" uid="uid://cua27td3ut3vx" path="res://Gameplay/Fighter/Attacks/BaseAttack/base_neutral_attack.tscn" id="3_bbp8m"]
-[ext_resource type="PackedScene" uid="uid://brx4rhlrso0b" path="res://Gameplay/Fighter/Attacks/BaseSpecial/base_neutral_special.tscn" id="3_swh3h"]
+[ext_resource type="PackedScene" uid="uid://cstb47fwsgsdd" path="res://Gameplay/Fighter/Attacks/StandardAttack/standard_neutral_attack.tscn" id="3_bbp8m"]
+[ext_resource type="PackedScene" uid="uid://gt2yaostcmt1" path="res://Gameplay/Fighter/Attacks/StandardAttack/standard_up_attack.tscn" id="4_swh3h"]
+[ext_resource type="PackedScene" uid="uid://dtqopj4e3lwin" path="res://Gameplay/Fighter/Attacks/StandardAttack/standard_down_attack.tscn" id="5_nab5g"]
+[ext_resource type="PackedScene" uid="uid://cqb8svf42p41d" path="res://Gameplay/Fighter/Attacks/StandardSpecial/standard_neutral_special.tscn" id="6_1rqga"]
+[ext_resource type="PackedScene" uid="uid://d38kuilp7w2u4" path="res://Gameplay/Fighter/Attacks/StandardSpecial/standard_up_special.tscn" id="7_g8gr4"]
+[ext_resource type="PackedScene" uid="uid://cwxwf2mffjqs3" path="res://Gameplay/Fighter/Attacks/StandardSpecial/standard_down_special.tscn" id="8_s5xgl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t4lfm"]
 radius = 16.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("neutral_attack", "neutral_special")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("up_attack", "neutral_attack", "down_attack", "up_special", "neutral_special", "down_special")]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_t4lfm")
-neutral_attack = NodePath("BaseNeutralAttack")
-neutral_special = NodePath("BaseNeutralSpecial")
+up_attack = NodePath("Attacks/StandardUpAttack")
+neutral_attack = NodePath("Attacks/StandardNeutralAttack")
+down_attack = NodePath("Attacks/StandardDownAttack")
+up_special = NodePath("Attacks/StandardUpSpecial")
+neutral_special = NodePath("Attacks/StandardNeutralSpecial")
+down_special = NodePath("Attacks/StandardDownSpecial")
+jump_velocity = -700.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_t4lfm")
@@ -22,6 +31,16 @@ shape = SubResource("CircleShape2D_t4lfm")
 position = Vector2(0, 12)
 emitting = false
 
-[node name="BaseNeutralSpecial" parent="." instance=ExtResource("3_swh3h")]
+[node name="Attacks" type="Node2D" parent="."]
 
-[node name="BaseNeutralAttack" parent="." instance=ExtResource("3_bbp8m")]
+[node name="StandardNeutralAttack" parent="Attacks" instance=ExtResource("3_bbp8m")]
+
+[node name="StandardUpAttack" parent="Attacks" instance=ExtResource("4_swh3h")]
+
+[node name="StandardDownAttack" parent="Attacks" instance=ExtResource("5_nab5g")]
+
+[node name="StandardNeutralSpecial" parent="Attacks" instance=ExtResource("6_1rqga")]
+
+[node name="StandardUpSpecial" parent="Attacks" instance=ExtResource("7_g8gr4")]
+
+[node name="StandardDownSpecial" parent="Attacks" instance=ExtResource("8_s5xgl")]

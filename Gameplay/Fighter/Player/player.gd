@@ -4,20 +4,19 @@ const roll_threshold:= 0.8
 const v_attack_threshold:= 0.3
 
 @onready var dynamic_particles:= $DynamicParticles
-@onready var base_attack:= $BaseAttack
+@onready var attacks:= $Attacks
 
 func _ready() -> void:
-	neutral_attack = base_attack
 	assign_attack_owner()
 
 func _physics_process(delta: float) -> void:
 	direction = Input.get_axis("left","right")
 	if direction < 0:
 		flip_horizontal = true
-		base_attack.scale.x = -1
+		attacks.scale.x = -1
 	elif direction > 0:
 		flip_horizontal = false
-		base_attack.scale.x = 1
+		attacks.scale.x = 1
 	v_direction = Input.get_axis("up", "down")
 	input_dir = Vector2(direction, v_direction)
 	can_jump = Input.is_action_just_pressed("jump") && jumps_available > 0
@@ -37,7 +36,7 @@ func _physics_process(delta: float) -> void:
 	
 
 func assign_attack_owner() -> void:
-	for child in get_children():
+	for child in attacks.get_children():
 		if child is Attack:
 			child.attack_owner = self
 

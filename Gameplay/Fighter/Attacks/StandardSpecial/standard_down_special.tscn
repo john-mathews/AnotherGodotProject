@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwxwf2mffjqs3"]
+
+[ext_resource type="Script" uid="uid://myydsvl8n1g5" path="res://Gameplay/Fighter/Attacks/StandardSpecial/standard_down_special.gd" id="1_iqus6"]
+
+[node name="StandardDownSpecial" type="Node2D"]
+script = ExtResource("1_iqus6")
+attack_name = "standard_down_special"
+damage = 1.0
+metadata/_custom_type_script = "uid://f2v7wdxyx01n"

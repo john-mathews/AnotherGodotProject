@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://gt2yaostcmt1"]
+
+[ext_resource type="Script" uid="uid://f2v7wdxyx01n" path="res://Gameplay/Fighter/Attacks/BaseAttack/base_attack.gd" id="1_d3dnh"]
+
+[node name="StandardUpAttack" type="Node2D"]
+script = ExtResource("1_d3dnh")
+attack_name = "standard_up_attack"
+damage = 10.0
+knockback = 20.0
+attack_hit_direction = Vector2(-1, -1)
+metadata/_custom_type_script = "uid://f2v7wdxyx01n"

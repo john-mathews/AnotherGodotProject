@@ -1,24 +1,27 @@
 class_name Fighter extends CharacterBody2D
 
-var max_speed: float = 300
-var acceleration: float = 30
-var friction: float = 5
-var air_strafe_speed: float = 300
-var air_strafe_acceleration: float = 15
-var air_resistence: float = 2
-var gravity_modifier: float = 1
-var jump_velocity: float = -500
-var jump_release_dampening: float = 2
-var max_jumps: int = 2
+@export_group("movement")
+@export var max_speed: float = 300
+@export var acceleration: float = 30
+@export var friction: float = 5
+@export var air_strafe_speed: float = 300
+@export var air_strafe_acceleration: float = 15
+@export var air_resistence: float = 2
+@export var gravity_modifier: float = 1
+@export var jump_velocity: float = -500
+@export var jump_release_dampening: float = 2
+@export var max_jumps: int = 2
+
+@export_group("combat")
 #number goes up like ssb
-var health: float = 0 
+@export var health: float = 0 
 #items or perks could help recover health over time
-var health_recharge_rate: float = 0 
-var shield: float = 100
-var shield_recharge_rate: float = .1
-var bounce: float = .5
-var absorption: float = .5
-var push_force: float = 100
+@export var health_recharge_rate: float = 0 
+@export var shield: float = 100
+@export var shield_recharge_rate: float = .1
+@export var bounce: float = .5
+@export var absorption: float = .5
+@export var push_force: float = 100
 
 #updated in physics process or by behavior
 var last_velocity: Vector2
@@ -28,6 +31,7 @@ var input_dir: Vector2
 var flip_horizontal: bool
 var jumps_available: int = 2
 
+var frozen:= false
 	
 func on_spawn() -> void:
 	SharedData.add_fighter(self)
@@ -53,7 +57,10 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, friction)
 		if jumps_available < max_jumps && velocity.y >= 0:
 			jumps_available = max_jumps
-				
+	
+	if frozen:
+		velocity = Vector2.ZERO
+		
 	var collision = move_and_slide()
 	if collision:
 		var collider = get_last_slide_collision().get_collider()

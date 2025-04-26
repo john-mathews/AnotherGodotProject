@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdt0erjwwecan"]
+
+[ext_resource type="Script" uid="uid://k03im10mpx08" path="res://Gameplay/Fighter/Player/player.gd" id="1_t4lfm"]
+[ext_resource type="PackedScene" uid="uid://boak455ec0dgy" path="res://FX/Particles/dynamic_particles.tscn" id="2_c7odp"]
+[ext_resource type="PackedScene" uid="uid://cua27td3ut3vx" path="res://Gameplay/Fighter/Attacks/BaseAttack/base_neutral_attack.tscn" id="3_bbp8m"]
+[ext_resource type="PackedScene" uid="uid://brx4rhlrso0b" path="res://Gameplay/Fighter/Attacks/BaseSpecial/base_neutral_special.tscn" id="3_swh3h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t4lfm"]
+radius = 16.0
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("up_attack", "neutral_attack", "down_attack", "up_special", "neutral_special", "down_special")]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_t4lfm")
+up_attack = NodePath("Attacks/BaseNeutralAttack")
+neutral_attack = NodePath("Attacks/BaseNeutralAttack")
+down_attack = NodePath("Attacks/BaseNeutralAttack")
+up_special = NodePath("Attacks/BaseNeutralSpecial")
+neutral_special = NodePath("Attacks/BaseNeutralSpecial")
+down_special = NodePath("Attacks/BaseNeutralSpecial")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_t4lfm")
+
+[node name="DynamicParticles" parent="." instance=ExtResource("2_c7odp")]
+position = Vector2(0, 12)
+emitting = false
+
+[node name="Attacks" type="Node2D" parent="."]
+
+[node name="BaseNeutralSpecial" parent="Attacks" instance=ExtResource("3_swh3h")]
+
+[node name="BaseNeutralAttack" parent="Attacks" instance=ExtResource("3_bbp8m")]
