@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://jfvxm63tgfgs"]
+
+[ext_resource type="Script" uid="uid://fc3tgw4j2ynk" path="res://UI/HUD/health_label.gd" id="1_qf6bu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qrlia"]
+bg_color = Color(0, 0, 0, 0.486275)
+corner_detail = 20
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ia7gp"]
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_ing8j"]
+font_size = 32
+
+[node name="HealthLabel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 2
+script = ExtResource("1_qf6bu")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -105.0
+offset_right = 105.0
+offset_bottom = 118.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qrlia")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Health" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "999%"
+label_settings = SubResource("LabelSettings_ia7gp")
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="Name" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Fighter Name"
+label_settings = SubResource("LabelSettings_ing8j")
+horizontal_alignment = 1

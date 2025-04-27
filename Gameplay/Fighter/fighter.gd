@@ -1,5 +1,7 @@
 class_name Fighter extends CharacterBody2D
 
+@export var fighter_name: String = 'Fighter!'
+
 @export_group("movement")
 @export var max_speed: float = 300
 @export var acceleration: float = 30
@@ -31,15 +33,26 @@ var input_dir: Vector2
 var flip_horizontal: bool
 var jumps_available: int = 2
 
+const health_label_path = 'uid://jfvxm63tgfgs'
+var health_label: HealthLabel
+
 var frozen:= false
+
+func _ready() -> void:
+	on_spawn()
 	
 func on_spawn() -> void:
 	SharedData.add_fighter(self)
-
+	health_label = preload(health_label_path).instantiate()
+	Command.create_fighter_label.emit(health_label, fighter_name)
 	
 #fall off stage -> remove stock etc
 func on_death() -> void:
 	pass
+
+func on_damaged() -> void:
+	if health_label != null:
+		health_label.set_health(health)
 
 #character out of stock -> removed from game -> game over?
 func on_elimination() -> void:

@@ -7,6 +7,7 @@ const v_attack_threshold:= 0.3
 @onready var attacks:= $Attacks
 
 func _ready() -> void:
+	super()
 	assign_attack_owner()
 
 func _physics_process(delta: float) -> void:

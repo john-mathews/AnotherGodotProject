@@ -30,6 +30,7 @@ func handle_collision(getting_hit: Fighter):
 	var relative_velocity = attack_force - getting_hit.velocity
 	getting_hit.velocity = relative_velocity * getting_hit.absorption
 	getting_hit.health += damage
+	getting_hit.on_damaged()
 	hurtbox.emit_particles(total_knockback)
 	
 

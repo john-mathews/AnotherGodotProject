@@ -7,11 +7,11 @@ const attacks_uid:= "uid://bcimm45u6x63r"
 #make new animation and load this library
 #don't use global library anywhere
 func _ready() -> void:
-	var hitbox = load(hit_box_uid).instantiate()
+	var hitbox = preload(hit_box_uid).instantiate()
 	hurtbox = hitbox
 	add_child(hitbox)
 	var new_animation = AnimationPlayer.new()
-	var attacks = load(attacks_uid)
+	var attacks = preload(attacks_uid)
 	new_animation.add_animation_library(attack_library_name, attacks)
 	animation = new_animation
 	add_child(animation)

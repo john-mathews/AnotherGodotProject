@@ -22,6 +22,7 @@ down_attack = NodePath("Attacks/StandardDownAttack")
 up_special = NodePath("Attacks/StandardUpSpecial")
 neutral_special = NodePath("Attacks/StandardNeutralSpecial")
 down_special = NodePath("Attacks/StandardDownSpecial")
+fighter_name = "Player"
 jump_velocity = -700.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -10,6 +10,9 @@ size = Vector2(800, 200)
 
 [node name="TestLevel" type="Node2D"]
 
+[node name="Hud" parent="." instance=ExtResource("4_67jai")]
+z_index = 5
+
 [node name="BaseLevel" parent="." instance=ExtResource("2_1hw1c")]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -32,5 +35,3 @@ position = Vector2(827, 495)
 
 [node name="InitialSpawner" type="Node2D" parent="SpawnPoints"]
 position = Vector2(788, 346)
-
-[node name="Hud" parent="." instance=ExtResource("4_67jai")]

@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 SceneSwitcher="*res://Globals/scene_switcher.gd"
 SharedData="*res://Globals/game_data.gd"
 MatchManager="*res://Gameplay/match_manager.gd"
+Command="*res://Globals/command.gd"
 
 [display]
 
