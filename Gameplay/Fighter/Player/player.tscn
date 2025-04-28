@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bdt0erjwwecan"]
+[gd_scene load_steps=12 format=3 uid="uid://bdt0erjwwecan"]
 
 [ext_resource type="Script" uid="uid://k03im10mpx08" path="res://Gameplay/Fighter/Player/player.gd" id="1_t4lfm"]
 [ext_resource type="PackedScene" uid="uid://boak455ec0dgy" path="res://FX/Particles/dynamic_particles.tscn" id="2_c7odp"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://cqb8svf42p41d" path="res://Gameplay/Fighter/Attacks/StandardSpecial/standard_neutral_special.tscn" id="6_1rqga"]
 [ext_resource type="PackedScene" uid="uid://d38kuilp7w2u4" path="res://Gameplay/Fighter/Attacks/StandardSpecial/standard_up_special.tscn" id="7_g8gr4"]
 [ext_resource type="PackedScene" uid="uid://cwxwf2mffjqs3" path="res://Gameplay/Fighter/Attacks/StandardSpecial/standard_down_special.tscn" id="8_s5xgl"]
+[ext_resource type="AnimationLibrary" uid="uid://bcimm45u6x63r" path="res://FX/Animations/attacks.res" id="9_1ynx1"]
+[ext_resource type="PackedScene" uid="uid://bvkwkh1yplrb5" path="res://Gameplay/Fighter/Attacks/BaseAttack/attack_hit_box.tscn" id="10_dcoq6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t4lfm"]
 radius = 16.0
@@ -23,7 +25,6 @@ up_special = NodePath("Attacks/StandardUpSpecial")
 neutral_special = NodePath("Attacks/StandardNeutralSpecial")
 down_special = NodePath("Attacks/StandardDownSpecial")
 fighter_name = "Player"
-jump_velocity = -700.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_t4lfm")
@@ -45,3 +46,13 @@ emitting = false
 [node name="StandardUpSpecial" parent="Attacks" instance=ExtResource("7_g8gr4")]
 
 [node name="StandardDownSpecial" parent="Attacks" instance=ExtResource("8_s5xgl")]
+
+[node name="AttackHitBox" parent="Attacks" instance=ExtResource("10_dcoq6")]
+physics_interpolation_mode = 1
+auto_translate_mode = 1
+priority = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"attacks": ExtResource("9_1ynx1")
+}

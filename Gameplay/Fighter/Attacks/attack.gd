@@ -11,9 +11,9 @@ var animation: AnimationPlayer
 var attack_owner: Fighter
 const attack_library_name:= "attacks"
 
-func _ready() -> void:
-	hurtbox.collision_layer = 0b0100
-	hurtbox.collision_mask = 0b0110
+	
+func set_hurtbox(hitbox: AttackHitBox) -> void:
+	hurtbox = hitbox
 	hurtbox.connect("body_entered", _on_body_entered)
 
 func _on_body_entered(body: Node2D):

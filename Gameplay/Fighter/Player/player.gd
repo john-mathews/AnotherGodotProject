@@ -5,6 +5,8 @@ const v_attack_threshold:= 0.3
 
 @onready var dynamic_particles:= $DynamicParticles
 @onready var attacks:= $Attacks
+@onready var animation_player:= $AnimationPlayer
+@onready var attack_hitbox:= $Attacks/AttackHitBox
 
 func _ready() -> void:
 	super()
@@ -40,6 +42,8 @@ func assign_attack_owner() -> void:
 	for child in attacks.get_children():
 		if child is Attack:
 			child.attack_owner = self
+			child.animation = animation_player
+			child.set_hurtbox(attack_hitbox)
 
 func select_attack(fighter: FighterWithBehaviors) -> Attack:
 	if fighter.v_direction < -v_attack_threshold:
