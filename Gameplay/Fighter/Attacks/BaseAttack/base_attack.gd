@@ -3,10 +3,14 @@ class_name BaseAttack extends Attack
 const hit_box_uid:= "uid://bvkwkh1yplrb5"
 const attacks_uid:= "uid://bcimm45u6x63r"
 
-#rename library and use for all attacks
-#make new animation and load this library
-#don't use global library anywhere
+
 func _ready() -> void:
+	## TODO
+	#optimize attacks by moving attack hit box and animation player 
+	#to the fighter level that can be shared by all attacks
+	#we can assign the player ones to the attack hurtbox and animation values
+	
+	
 	var hitbox = preload(hit_box_uid).instantiate()
 	hurtbox = hitbox
 	add_child(hitbox)

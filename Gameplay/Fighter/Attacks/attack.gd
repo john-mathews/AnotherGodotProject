@@ -5,7 +5,7 @@ class_name Attack extends Node2D
 @export var knockback: float #use collision normal for direction
 @export var attack_hit_direction: Vector2
 
-var hurtbox: Area2D
+var hurtbox: AttackHitBox
 var animation: AnimationPlayer 
 
 var attack_owner: Fighter
@@ -35,4 +35,5 @@ func handle_collision(getting_hit: Fighter):
 	
 
 func play(animation_name: String) -> void:
-	animation.play(attack_library_name + "/" + animation_name)
+	if animation != null:
+		animation.play(attack_library_name + "/" + animation_name)

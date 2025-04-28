@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhwpt88dcq3ek"]
+
+[ext_resource type="Script" uid="uid://c3gawwa43uprs" path="res://Gameplay/Fighter/Attacks/Projectiles/base_projectile.gd" id="1_qrcch"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ip28t"]
+
+[node name="BaseProjectile" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 7
+floor_stop_on_slope = false
+script = ExtResource("1_qrcch")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ip28t")
+debug_color = Color(0.57903, 0.25074, 0.677558, 0.42)

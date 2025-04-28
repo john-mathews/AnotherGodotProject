@@ -34,7 +34,7 @@ var flip_horizontal: bool
 var jumps_available: int = 2
 
 const health_label_path = 'uid://jfvxm63tgfgs'
-var health_label: HealthLabel
+var health_label: HealthLabel 
 
 var frozen:= false
 
