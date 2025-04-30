@@ -1,5 +1,6 @@
 class_name AttackHitBox extends Area2D
 
+
 @onready var particles := $AttackParticles
 @onready var collision := $CollisionShape2D
 

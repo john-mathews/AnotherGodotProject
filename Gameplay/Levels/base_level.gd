@@ -14,6 +14,7 @@ func respawn_fighter(fighter: Fighter) -> void:
 		fighter.global_position = global_position
 		fighter.health = 0
 		fighter.gravity_modifier = 0
+		fighter.on_respawn()
 
 		await get_tree().create_timer(.2).timeout
 		fighter.gravity_modifier = 1

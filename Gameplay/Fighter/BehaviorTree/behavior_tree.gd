@@ -33,12 +33,12 @@ func _physics_process(delta: float) -> void:
 			pass
 		elif can_shield:
 			pass
-		elif can_special:
-			var selected_special = select_special(self)
-			selected_special.play(selected_special.attack_name)
+		elif can_special :
+			current_attack = select_special(self)
+			current_attack.play(current_attack.attack_name)
 		elif can_attack:
-			var selected_attack = select_attack(self)
-			selected_attack.play(selected_attack.attack_name)
+			current_attack = select_attack(self)
+			current_attack.play(current_attack.attack_name)
 		
 		#movement behaviors	
 		if can_fall:

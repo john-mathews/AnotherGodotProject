@@ -16,7 +16,11 @@ class_name Fighter extends CharacterBody2D
 
 @export_group("combat")
 #number goes up like ssb
-@export var health: float = 0 
+@export var health: float = 0:
+	set(value):
+		health = value
+		on_damaged()
+		
 #items or perks could help recover health over time
 @export var health_recharge_rate: float = 0 
 @export var shield: float = 100
@@ -24,6 +28,10 @@ class_name Fighter extends CharacterBody2D
 @export var bounce: float = .5
 @export var absorption: float = .5
 @export var push_force: float = 100
+
+var attack_hitbox: AttackHitBox
+var animation: AnimationPlayer
+var current_attack: Attack
 
 #updated in physics process or by behavior
 var last_velocity: Vector2
@@ -39,12 +47,20 @@ var health_label: HealthLabel
 var frozen:= false
 
 func _ready() -> void:
-	on_spawn()
+	if attack_hitbox:
+		attack_hitbox.connect("body_entered", on_body_entered_attack_hitbox)
+	on_spawn() 
 	
 func on_spawn() -> void:
 	SharedData.add_fighter(self)
 	health_label = preload(health_label_path).instantiate()
 	Command.create_fighter_label.emit(health_label, fighter_name)
+	on_respawn()
+	
+	
+func on_respawn() -> void:
+	health_label.set_health(0)
+	
 	
 #fall off stage -> remove stock etc
 func on_death() -> void:
@@ -59,7 +75,7 @@ func on_elimination() -> void:
 	SharedData.remove_fighter(self)
 	queue_free()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta: float) -> void:		
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * gravity_modifier * delta
@@ -93,3 +109,20 @@ func handle_collision(other_ball: Fighter):
 	
 	velocity += impulse * collision_normal * absorption
 	other_ball.velocity -= impulse * collision_normal * other_ball.absorption
+
+func on_body_entered_attack_hitbox(body: Node2D) -> void:
+	if body is Fighter && body != self && current_attack:
+		handle_combat_collision(body)
+
+func handle_combat_collision(getting_hit: Fighter) -> void:
+	var collision_normal = (getting_hit.position - position).normalized()
+	#collision_normal.y -= 1 #adds more vertical knockback to hit
+	var hit_direction_modifier = Vector2(-1, 1) if flip_horizontal else Vector2(1, 1)
+	var total_knockback = current_attack.knockback * max(getting_hit.health/2, 1)
+	var total_direction = collision_normal + (current_attack.attack_hit_direction * hit_direction_modifier)
+	var attack_force =  total_direction * total_knockback
+	var relative_velocity = attack_force - getting_hit.velocity
+	getting_hit.velocity = relative_velocity * getting_hit.absorption
+
+	getting_hit.health += current_attack.damage
+	attack_hitbox.emit_particles(total_knockback)

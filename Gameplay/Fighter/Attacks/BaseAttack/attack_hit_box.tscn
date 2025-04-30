@@ -10,6 +10,8 @@ collision_layer = 4
 collision_mask = 6
 monitoring = false
 script = ExtResource("1_p2kto")
+dimensions = Vector2(10, 0)
+shape_type = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_bgcv7")

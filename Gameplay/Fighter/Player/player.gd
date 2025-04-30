@@ -6,11 +6,14 @@ const v_attack_threshold:= 0.3
 @onready var dynamic_particles:= $DynamicParticles
 @onready var attacks:= $Attacks
 @onready var animation_player:= $AnimationPlayer
-@onready var attack_hitbox:= $Attacks/AttackHitBox
+@onready var attack_hitbox_node:= $Attacks/AttackHitBox
 
 func _ready() -> void:
+	animation = animation_player
+	attack_hitbox = attack_hitbox_node
 	super()
 	assign_attack_owner()
+
 
 func _physics_process(delta: float) -> void:
 	direction = Input.get_axis("left","right")
@@ -42,8 +45,6 @@ func assign_attack_owner() -> void:
 	for child in attacks.get_children():
 		if child is Attack:
 			child.attack_owner = self
-			child.animation = animation_player
-			child.set_hurtbox(attack_hitbox)
 
 func select_attack(fighter: FighterWithBehaviors) -> Attack:
 	if fighter.v_direction < -v_attack_threshold:

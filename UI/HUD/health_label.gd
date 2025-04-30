@@ -5,7 +5,7 @@ class_name HealthLabel extends Control
 
 
 func set_health(value: float) -> void:
-	health.text = str(value)+'%'
+	health.text = str(snappedf(value, .01))+'%'
 
 func set_fighter_name(new_name: String) -> void:
 	fighter_name.text = new_name
