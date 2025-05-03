@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3pyabiupnkaa"]
+
+[ext_resource type="Script" uid="uid://ckejuolwd7vp1" path="res://Gameplay/Fighter/combat_collision_handler.gd" id="1_745wr"]
+
+[node name="CombatCollisionHandler" type="Node2D"]
+script = ExtResource("1_745wr")

@@ -7,6 +7,8 @@ func _ready() -> void:
 func _on_battle_field_body_exited(body: Node2D) -> void:
 	if body is Fighter:
 		respawn_fighter(body)
+	elif body is BaseProjectile:
+		body.queue_free()
 		#later we can handle more death logic, 
 		#but just nice to be able to reset for now
 func respawn_fighter(fighter: Fighter) -> void:

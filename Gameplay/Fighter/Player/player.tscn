@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bdt0erjwwecan"]
+[gd_scene load_steps=14 format=3 uid="uid://bdt0erjwwecan"]
 
 [ext_resource type="Script" uid="uid://k03im10mpx08" path="res://Gameplay/Fighter/Player/player.gd" id="1_t4lfm"]
 [ext_resource type="PackedScene" uid="uid://boak455ec0dgy" path="res://FX/Particles/dynamic_particles.tscn" id="2_c7odp"]
@@ -14,9 +14,29 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_t4lfm"]
 radius = 16.0
 
+[sub_resource type="Animation" id="Animation_1ynx1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Attacks/AttackHitBox:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(20, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dcoq6"]
+_data = {
+&"RESET": SubResource("Animation_1ynx1")
+}
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("up_attack", "neutral_attack", "down_attack", "up_special", "neutral_special", "down_special")]
 collision_layer = 2
-collision_mask = 15
+collision_mask = 31
 script = ExtResource("1_t4lfm")
 up_attack = NodePath("Attacks/StandardUpAttack")
 neutral_attack = NodePath("Attacks/StandardNeutralAttack")
@@ -51,9 +71,13 @@ attack_hit_direction = Vector2(-1, -10)
 [node name="AttackHitBox" parent="Attacks" instance=ExtResource("10_dcoq6")]
 physics_interpolation_mode = 1
 auto_translate_mode = 1
+position = Vector2(20, 0)
 priority = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
+&"": SubResource("AnimationLibrary_dcoq6"),
 &"attacks": ExtResource("9_1ynx1")
 }
+
+[node name="Projectiles" type="Node" parent="."]

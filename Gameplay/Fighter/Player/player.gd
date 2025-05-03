@@ -7,6 +7,7 @@ const v_attack_threshold:= 0.3
 @onready var attacks:= $Attacks
 @onready var animation_player:= $AnimationPlayer
 @onready var attack_hitbox_node:= $Attacks/AttackHitBox
+@onready var projectile_list:= $Projectiles
 
 func _ready() -> void:
 	animation = animation_player

@@ -4,6 +4,7 @@ class_name Attack extends Node2D
 @export var damage: float
 @export var knockback: float #use collision normal for direction
 @export var attack_hit_direction: Vector2
+@export var is_projectile:= false
 
 var attack_owner: Fighter
 const attack_library_name:= "attacks"

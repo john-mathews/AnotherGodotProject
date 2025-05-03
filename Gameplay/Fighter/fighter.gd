@@ -44,9 +44,12 @@ var jumps_available: int = 2
 const health_label_path = 'uid://jfvxm63tgfgs'
 var health_label: HealthLabel 
 
+var combat_collision_handler: CombatCollisionHandler
 var frozen:= false
 
 func _ready() -> void:
+	combat_collision_handler = CombatCollisionHandler.new()
+	add_child(combat_collision_handler)
 	if attack_hitbox:
 		attack_hitbox.connect("body_entered", on_body_entered_attack_hitbox)
 	on_spawn() 
@@ -111,18 +114,5 @@ func handle_collision(other_ball: Fighter):
 	other_ball.velocity -= impulse * collision_normal * other_ball.absorption
 
 func on_body_entered_attack_hitbox(body: Node2D) -> void:
-	if body is Fighter && body != self && current_attack:
-		handle_combat_collision(body)
-
-func handle_combat_collision(getting_hit: Fighter) -> void:
-	var collision_normal = (getting_hit.position - position).normalized()
-	#collision_normal.y -= 1 #adds more vertical knockback to hit
-	var hit_direction_modifier = Vector2(-1, 1) if flip_horizontal else Vector2(1, 1)
-	var total_knockback = current_attack.knockback * max(getting_hit.health/2, 1)
-	var total_direction = collision_normal + (current_attack.attack_hit_direction * hit_direction_modifier)
-	var attack_force =  total_direction * total_knockback
-	var relative_velocity = attack_force - getting_hit.velocity
-	getting_hit.velocity = relative_velocity * getting_hit.absorption
-
-	getting_hit.health += current_attack.damage
-	attack_hitbox.emit_particles(total_knockback)
+	if body is Fighter && body != self:
+		combat_collision_handler.handle_combat_collision(self, body, current_attack)

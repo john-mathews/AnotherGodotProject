@@ -10,3 +10,4 @@ func owner_velocity_override(_vel: Vector2) -> void:
 	await get_tree().create_timer(.5).timeout
 	attack_owner.friction = og_friction
 	attack_owner.air_resistence = og_air_resistance
+	

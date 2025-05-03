@@ -9,9 +9,3 @@ func freeze_owner() -> void:
 	
 func unfreeze_owner() -> void:
 	attack_owner.frozen = false
-
-func set_init() -> void:
-	pass
-
-func reset_init() -> void:
-	pass
