@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 			pass
 		elif can_shield:
 			pass
-		elif can_special :
+		elif can_special:
 			current_attack = select_special(self)
 			current_attack.play(current_attack.attack_name)
 		elif can_attack:

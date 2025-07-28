@@ -34,7 +34,7 @@ _data = {
 &"RESET": SubResource("Animation_1ynx1")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("up_attack", "neutral_attack", "down_attack", "up_special", "neutral_special", "down_special")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("up_attack", "neutral_attack", "down_attack", "up_special", "neutral_special", "down_special") groups=["BrainTargets"]]
 collision_layer = 2
 collision_mask = 31
 script = ExtResource("1_t4lfm")
