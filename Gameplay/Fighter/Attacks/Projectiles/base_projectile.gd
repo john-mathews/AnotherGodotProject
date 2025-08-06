@@ -12,8 +12,8 @@ class_name BaseProjectile extends CharacterBody2D
 @export var bounciness: float = 0.6
 
 const attack_particles_uid = 'uid://c1rx4heifng37'
-const min_particles:= 5
-const max_particles:= 100
+const min_particles := 25
+const max_particles := 100
 
 # Internal variables
 var time_elapsed: float = 0.0
@@ -27,6 +27,7 @@ func _ready() -> void:
 	combat_collision_handler = CombatCollisionHandler.new()
 	add_child(combat_collision_handler)
 	particles = preload(attack_particles_uid).instantiate()
+	particles.lifetime = 0.1
 	add_child(particles)
 	
 	initial_direction = -1 if attack.attack_owner.flip_horizontal else 1
@@ -40,8 +41,8 @@ func _ready() -> void:
 	set_collision_layer_value(1, false)
 	set_collision_mask_value(1, true)
 	set_collision_mask_value(2, true)
-	set_collision_mask_value(3, true)
-	set_collision_mask_value(4, true)
+	set_collision_mask_value(3, false)
+	set_collision_mask_value(4, false)
 	add_child(collision_shape)
 
 func _physics_process(delta: float) -> void:
@@ -74,7 +75,10 @@ func _physics_process(delta: float) -> void:
 	if collision:
 		var collider = get_last_slide_collision().get_collider()
 		if collider is Fighter && collider != attack.attack_owner:
-			handle_collision(collider)
+			handle_fighter_collision(collider)
+		elif collider != attack.attack_owner:
+			emit_particles(attack.knockback)
+
 	
 	# Handle timed explosion
 	if explosion_timer > 0.0:
@@ -84,14 +88,14 @@ func _physics_process(delta: float) -> void:
 			queue_free()
 
 # Function to handle collisions
-func handle_collision(collider: Fighter) -> void:
-	print('projectile handle collision')
+func handle_fighter_collision(collider: Fighter) -> void:
 	var collision_normal = (collider.global_position - global_position).normalized()
 
 	if collider is Fighter && collider != attack.attack_owner:
+		velocity = collider.velocity
 		combat_collision_handler.handle_combat_collision(self, collider, attack)
 		emit_particles(attack.knockback)
-		
+
 	if explode_on_contact:
 		Command.projectile_explode.emit(attack) # Send the hit object
 		
@@ -102,9 +106,13 @@ func handle_collision(collider: Fighter) -> void:
 	else:
 		if is_explosive:
 			Command.projectile_explode.emit(attack) # Send the hit object
-		queue_free() # Remove grenade after max bounces
+
 
 func emit_particles(knockback: float) -> void:
-	particles.amount = clamp(knockback/50, min_particles, max_particles)
+	particles.amount = clamp(knockback / 50, min_particles, max_particles)
 	if !particles.is_emitting():
 		particles.set_emitting(true)
+		collision_mask = 0
+		#once we have sprite toggle visibility off 
+		await particles.finished
+		queue_free()

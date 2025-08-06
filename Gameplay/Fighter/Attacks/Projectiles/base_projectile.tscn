@@ -5,15 +5,6 @@
 [node name="BaseProjectile" type="CharacterBody2D"]
 physics_interpolation_mode = 1
 collision_layer = 8
-collision_mask = 15
+collision_mask = 3
 floor_stop_on_slope = false
 script = ExtResource("1_qrcch")
-speed = null
-pattern = null
-gravity = null
-explosion_timer = null
-is_explosive = null
-explode_on_contact = null
-arc_angle = null
-max_bounces = null
-bounciness = null

@@ -34,10 +34,16 @@ _data = {
 &"RESET": SubResource("Animation_1ynx1")
 }
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("up_attack", "neutral_attack", "down_attack", "up_special", "neutral_special", "down_special")]
 collision_layer = 2
 collision_mask = 31
 script = ExtResource("1_4767f")
+up_attack = NodePath("Attacks/StandardUpAttack")
+neutral_attack = NodePath("Attacks/StandardNeutralAttack")
+down_attack = NodePath("Attacks/StandardDownAttack")
+up_special = NodePath("Attacks/StandardUpSpecial")
+neutral_special = NodePath("Attacks/StandardNeutralSpecial")
+down_special = NodePath("Attacks/StandardDownSpecial")
 metadata/_custom_type_script = "uid://buvkep52ulua4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -63,7 +69,6 @@ attack_hit_direction = Vector2(-1, -10)
 [node name="StandardDownSpecial" parent="Attacks" instance=ExtResource("8_0w83a")]
 
 [node name="AttackHitBox" parent="Attacks" instance=ExtResource("9_cac40")]
-physics_interpolation_mode = 1
 auto_translate_mode = 1
 position = Vector2(20, 0)
 priority = 5

@@ -1,5 +1,8 @@
 {
     "godotTools.editorPath.godot4": "c:\\Users\\j-mat\\Documents\\Godot\\Godot_v4.4.1-stable_win64.exe\\Godot_v4.4.1-stable_win64.exe",
     "editor.defaultFormatter": "geequlim.godot-tools",
-    "editor.insertSpaces": false
+    "editor.insertSpaces": false,
+    "editor.useTabStops": false,
+	"editor.detectIndentation": false,
+	"editor.comments.insertSpace": false
 }

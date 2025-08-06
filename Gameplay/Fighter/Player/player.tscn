@@ -69,12 +69,13 @@ attack_hit_direction = Vector2(-1, -10)
 [node name="StandardDownSpecial" parent="Attacks" instance=ExtResource("8_s5xgl")]
 
 [node name="AttackHitBox" parent="Attacks" instance=ExtResource("10_dcoq6")]
-physics_interpolation_mode = 1
 auto_translate_mode = 1
 position = Vector2(20, 0)
+monitoring = true
 priority = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+physics_interpolation_mode = 1
 libraries = {
 &"": SubResource("AnimationLibrary_dcoq6"),
 &"attacks": ExtResource("9_1ynx1")
